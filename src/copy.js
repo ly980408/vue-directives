@@ -1,5 +1,6 @@
 /**
- *  v-copy 复制内容
+ * v-copy
+ * @description 复制内容
  */
 
  const copy = {
