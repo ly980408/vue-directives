@@ -3,11 +3,13 @@
  * @description 复制内容
  */
 
- const copy = {
-  bind: function (el, binding) {
+const scope = 'vCopy'
+
+const copy = {
+  inserted: function (el, binding) {
     el.dataset.copy = binding.value
 
-    el.addEventListener('click', () => {
+    const onClick = () => {
       const textarea = document.createElement('textarea')
       textarea.readOnly = 'readonly'
       textarea.style.position = 'fixed'
@@ -18,7 +20,10 @@
       const res = document.execCommand('Copy')
       res && console.log('复制成功！')
       document.body.removeChild(textarea)
-    })
+    }
+    
+    el[scope] = { onClick }
+    el.addEventListener('click', onClick)
   },
 
   update: function(el, binding) {
@@ -26,7 +31,8 @@
   },
 
   unbind: function(el) {
-    el.removeEventListener('click', () => {})
+    const { onClick } = el[scope]
+    el.removeEventListener('click', onClick)
   }
 }
 
