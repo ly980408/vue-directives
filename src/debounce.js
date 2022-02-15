@@ -24,7 +24,10 @@ const debounce = {
         fn()
       }, delay)
     })
-  },
+  }
+}
+debounce.install = function(Vue) {
+  Vue.directive('Debounce', this)
 }
 
 export default debounce
