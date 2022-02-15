@@ -1,12 +1,11 @@
+const scope = 'vCopy'
+
 /**
  * v-copy
  * @description 复制内容
  */
-
-const scope = 'vCopy'
-
 const copy = {
-  inserted: function (el, binding) {
+  inserted(el, binding) {
     el.dataset.copy = binding.value
 
     const onClick = () => {
@@ -26,14 +25,17 @@ const copy = {
     el.addEventListener('click', onClick)
   },
 
-  update: function(el, binding) {
+  update(el, binding) {
     el.dataset.copy = binding.value
   },
 
-  unbind: function(el) {
+  unbind(el) {
     const { onClick } = el[scope]
     el.removeEventListener('click', onClick)
   }
+}
+copy.install = function(Vue) {
+  Vue.directive('Copy', this)
 }
 
 export default copy
