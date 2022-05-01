@@ -16,12 +16,12 @@ const debounce = {
     const delay = Number(el.getAttribute('debounce-delay')) || defaultDelay
 
     let timer
-    el.addEventListener(eventType, () => {
+    el.addEventListener(eventType, event => {
       if (timer) {
         clearTimeout(timer)
       }
       timer = setTimeout(() => {
-        fn()
+        fn(event)
       }, delay)
     })
   }
